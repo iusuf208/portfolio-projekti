@@ -1,0 +1,87 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retro Game House – Hall of Fame</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <img
+          src="assets/logo-white.png"
+          alt="Retro Game House logo"
+          class="logo"
+        />
+        <button class="login-btn">Kirjaudu</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <input type="text" id="search" placeholder="Hae peliä..." />
+        <section id="game-list"></section>
+        <div id="pagination"></div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Retro Game House | Tekijät: Opiskelija | Koulu</p>
+      </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
+
+<!-- peli.html -->
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Peli – Hall of Fame</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <img
+          src="assets/logo-white.png"
+          alt="Retro Game House logo"
+          class="logo"
+        />
+        <button class="login-btn">Kirjaudu</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div id="game-details"></div>
+        <input type="text" id="player-search" placeholder="Hae käyttäjää..." />
+        <table id="score-table"></table>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Retro Game House | Tekijät: Opiskelija | Koulu</p>
+      </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>

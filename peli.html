@@ -1,0 +1,125 @@
+<!-- peli.html -->
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pelin tiedot – Retro Game House</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Press Start 2P', monospace;
+      margin: 0;
+      padding: 0;
+      background-color: #1a1a1a;
+      color: #fff;
+    }
+    header, footer {
+      background-color: #111;
+      padding: 1rem;
+      text-align: center;
+    }
+    header img.logo {
+      height: 50px;
+    }
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .pelikuva {
+      max-width: 300px;
+      border-radius: 8px;
+    }
+    .tuloslista {
+      margin-top: 1rem;
+    }
+    .tuloslista li {
+      margin-bottom: 0.5rem;
+    }
+    .top1 { color: gold; font-weight: bold; }
+    .top2 { color: silver; }
+    .top3 { color: #cd7f32; } /* Pronssi */
+    input#hakukentta {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.5rem;
+      margin: 1rem 0;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="Retro Game House logo" class="logo" />
+    <button id="loginBtn">Kirjaudu</button>
+  </header>
+  <main>
+    <div id="pelitiedot"></div>
+    <input type="text" id="hakukentta" placeholder="Etsi käyttäjänimiä..." />
+    <ul id="tuloslista" class="tuloslista"></ul>
+  </main>
+  <footer>
+    <p>© 2025 Retro Game House | Tekijät: Opiskelijat X, Y | Oppilaitos</p>
+  </footer>
+  <script>
+    const pelit = [
+      {
+        "id": 1,
+        "nimi": "Space Invaders",
+        "kuva": "assets/space_invaders.jpg",
+        "tulokset": [
+          { "kayttaja": "Pelaaja1", "tulos": 9870, "paivamaara": "2025-05-01" },
+          { "kayttaja": "Pelaaja2", "tulos": 8760, "paivamaara": "2025-04-28" },
+          { "kayttaja": "Pelaaja3", "tulos": 7650, "paivamaara": "2025-04-25" }
+        ]
+      },
+      {
+        "id": 2,
+        "nimi": "Pac-Man",
+        "kuva": "assets/pacman.jpg",
+        "tulokset": [
+          { "kayttaja": "PacMies", "tulos": 12000, "paivamaara": "2025-04-20" },
+          { "kayttaja": "GhostHunter", "tulos": 11000, "paivamaara": "2025-04-18" }
+        ]
+      }
+    ];
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const peliId = parseInt(urlParams.get('id'));
+    const peli = pelit.find(p => p.id === peliId);
+
+    if (peli) {
+      document.getElementById("pelitiedot").innerHTML = `
+        <h2>${peli.nimi}</h2>
+        <img src="${peli.kuva}" alt="${peli.nimi}" class="pelikuva" />
+      `;
+
+      let suodatetutTulokset = peli.tulokset;
+
+      document.getElementById("hakukentta").addEventListener("input", () => {
+        clearTimeout(window.debounce);
+        window.debounce = setTimeout(() => {
+          const haku = document.getElementById("hakukentta").value.toLowerCase();
+          suodatetutTulokset = peli.tulokset.filter(t => t.kayttaja.toLowerCase().includes(haku));
+          naytaTulokset(suodatetutTulokset);
+        }, 300);
+      });
+
+      function naytaTulokset(tulokset) {
+        tulokset.sort((a, b) => b.tulos - a.tulos);
+        const lista = tulokset.slice(0, 20).map((t, i) => {
+          let luokka = i === 0 ? 'top1' : i === 1 ? 'top2' : i === 2 ? 'top3' : '';
+          return `<li class="${luokka}">${i + 1}. ${t.kayttaja} – ${t.tulos} (${t.paivamaara})</li>`;
+        }).join("");
+        document.getElementById("tuloslista").innerHTML = lista;
+      }
+
+      naytaTulokset(suodatetutTulokset);
+    } else {
+      document.getElementById("pelitiedot").innerHTML = `<p>Peliä ei löytynyt.</p>`;
+    }
+  </script>
+</body>
+</html>

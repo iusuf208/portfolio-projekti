@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nimi": "Space Invaders",
+    "kuva": "assets/space_invaders.jpg",
+    "tulokset": [
+      { "kayttaja": "Pelaaja1", "tulos": 9870, "paivamaara": "2025-05-01" }
+    ]
+  },
+  {
+    "id": 2,
+    "nimi": "Pac-Man",
+    "kuva": "assets/pacman.jpg",
+    "tulokset": [
+      { "kayttaja": "PacMies", "tulos": 12000, "paivamaara": "2025-04-20" }
+    ]
+  }
+]
